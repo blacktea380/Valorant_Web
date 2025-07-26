@@ -42,6 +42,14 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #4299e1;
         }
+        /* 新增圖片容器的過渡效果，讓放大更平滑 */
+        .agent-image-container {
+            transition: transform 0.3s ease-in-out; /* 平滑過渡效果 */
+        }
+        /* 滑鼠懸停時放大 */
+        .agent-image-container:hover {
+            transform: scale(1.05); /* 放大 5% */
+        }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -67,10 +75,10 @@
         const agents = [
             {
                 id: 'jett',
-                name: '捷提 (Jett)',
+                name: '捷特 (Jett)',
                 role: '決鬥者 (Duelist)',
                 bio: '來自韓國的靈活特務，擅長快速突襲和撤退，以其敏捷的身法和精準的刀刃在戰場上穿梭。',
-                image: 'https://placehold.co/400x400/ef4444/ffffff?text=Jett', // Red background for Jett
+                image: './images/jett.jpg', // Jett 圖片已設定
                 abilities: [
                     { name: '疾風 (Tailwind)', description: '立即朝移動方向衝刺一小段距離。' },
                     { name: '向上氣流 (Updraft)', description: '啟動後向上推進。' },
@@ -80,10 +88,10 @@
             },
             {
                 id: 'sage',
-                name: '聖祈 (Sage)',
+                name: '聖哲 (Sage)',
                 role: '控場者 (Sentinel)',
                 bio: '來自中國的治療型特務，能夠治療盟友和減緩敵人，是團隊中不可或缺的支援角色。',
-                image: 'https://placehold.co/400x400/3b82f6/ffffff?text=Sage', // Blue background for Sage
+                image: './images/sage.jpg', // 已更新為 sage.jpg
                 abilities: [
                     { name: '緩速寶珠 (Slow Orb)', description: '投擲一個緩速寶珠，在地面生成一個會減緩敵人速度的區域。' },
                     { name: '治療寶珠 (Healing Orb)', description: '治療一名受傷的盟友。' },
@@ -96,7 +104,7 @@
                 name: '蘇法 (Sova)',
                 role: '先鋒 (Initiator)',
                 bio: '來自俄羅斯的偵察型特務，擅長用弓箭揭露敵人位置，為隊友提供關鍵情報。',
-                image: 'https://placehold.co/400x400/22c55e/ffffff?text=Sova', // Green background for Sova
+                image: './images/sova.jpg', // 已更新為 sova.jpg
                 abilities: [
                     { name: '偵察箭 (Recon Bolt)', description: '射出一支偵察箭，會發出聲納脈衝，揭露附近敵人的位置。' },
                     { name: '震盪箭 (Shock Bolt)', description: '射出一支會爆炸並傷害敵人的箭。' },
@@ -106,10 +114,10 @@
             },
             {
                 id: 'phoenix',
-                name: '菲尼克斯 (Phoenix)',
+                name: '鳳凰 (Phoenix)',
                 role: '決鬥者 (Duelist)',
                 bio: '來自英國的火系特務，能用火焰傷害敵人並自我治療，以其侵略性的打法主導戰場。',
-                image: 'https://placehold.co/400x400/f97316/ffffff?text=Phoenix', // Orange background for Phoenix
+                image: './images/phx.jpg', // 已更新為 phoenix.jpg
                 abilities: [
                     { name: '燃燒彈 (Hot Hands)', description: '投擲一個燃燒彈，在地面生成一個火焰區域，傷害敵人並治療自己。' },
                     { name: '烈焰之牆 (Blaze)', description: '召喚一道火焰牆，阻擋視野並傷害穿過的敵人。' },
@@ -122,7 +130,7 @@
                 name: '歐門 (Omen)',
                 role: '控場者 (Controller)',
                 bio: '一個來自陰影的幽靈特務，擅長用傳送和煙霧來迷惑敵人，並控制戰場。',
-                image: 'https://placehold.co/400x400/6b7280/ffffff?text=Omen', // Gray background for Omen
+                image: './images/omen.jpg', // 已更新為 omen.jpg
                 abilities: [
                     { name: '暗影步 (Shrouded Step)', description: '短距離傳送至可見位置。' },
                     { name: '偏執狂 (Paranoia)', description: '發射一個暗影投射物，可使敵人視野受限。' },
@@ -149,7 +157,7 @@
             const agentCardHtml = `
                 <div class="agent-card p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 md:gap-8">
                     <!-- Agent Image -->
-                    <div class="flex-shrink-0 w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border-4 border-red-500 shadow-lg">
+                    <div class="agent-image-container flex-shrink-0 w-64 h-80 md:w-80 md:h-96 rounded-full overflow-hidden shadow-lg">
                         <img src="${agent.image}" alt="${agent.name}" class="w-full h-full object-cover">
                     </div>
 
@@ -182,8 +190,8 @@
         agents.forEach(agent => {
             const button = document.createElement('button');
             button.className = 'px-5 py-2 rounded-full font-semibold text-lg transition-all duration-300 ease-in-out ' +
-                              'bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-lg ' +
-                              'focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75';
+                               'bg-red-600 hover:bg-red-700 text-white shadow-md hover:shadow-lg ' +
+                               'focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75';
             button.textContent = agent.name.split(' ')[0]; // Display only the Chinese name
             button.onclick = () => displayAgent(agent.id);
             agentSelectionDiv.appendChild(button);
