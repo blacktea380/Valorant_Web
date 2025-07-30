@@ -45,8 +45,9 @@
         }
         /* 新增圖片容器的過渡效果，讓放大更平滑 */
         .agent-image-container {
-            transition: transform 0.3s ease-in-out; /* 調整過渡時間，讓放大更平滑 */
-            animation: flip-horizontal 5s infinite ease-in-out; /* 自動旋轉 */
+            transition: transform 0.3s ease-in-out;
+            animation: flip-horizontal 5s infinite ease-in-out;
+            margin-top: -300px; /* 向上調整 10px */
         }
         /* 定義水平翻轉動畫 */
         @keyframes flip-horizontal {
@@ -64,6 +65,14 @@
         .agent-image-container:hover {
             transform: scale(1.05); /* 放大 5% */
             animation: flip-horizontal 5s infinite ease-in-out; /* 每秒翻轉一次，無限循環，平滑效果 */
+        }
+        .quote-image {
+            width: 330px;   /* 固定寬度 */
+            height: 270px;  /* 固定高度 */
+            object-fit: cover;
+            border-radius: 1rem;
+            margin: 0 auto 1.25rem auto;
+            display: block;
         }
     </style>
 </head>
@@ -94,7 +103,8 @@
                 role: '決鬥者 (Duelist)',
                 bio: '來自韓國的靈活特務，擅長快速突襲和撤退，以其敏捷的身法和精準的刀刃在戰場上穿梭。',
                 image: './images/jett.jpg',
-                extra: '名言金句：Jett revive me!!! Jett revive me! Jettttt !!!',
+                quoteImage: './images/jett_meme.jpg',
+                extra: '名言金句：Jett revive me! Jett revive me!!! Jett!!!!!',
                 abilities: [
                     { name: '順風式 (Tailwind)', description: '立即朝移動方向衝刺一小段距離。' },
                     { name: '乘風飛躍 (Updraft)', description: '啟動後向上推進。' },
@@ -108,6 +118,7 @@
                 role: '控場者 (Sentinel)',
                 bio: '來自中國的治療型特務，能夠治療盟友和減緩敵人，是團隊中不可或缺的支援角色。',
                 image: './images/sage.jpg',
+                quoteImage: './images/sage_meme.jpg',
                 extra: '小知識：聖祈的起死回生能讓團隊在關鍵時刻逆轉戰局。',
                 abilities: [
                     { name: '緩速靈球 (Slow Orb)', description: '投擲一個緩速寶珠，在地面生成一個會減緩敵人速度的區域。' },
@@ -122,6 +133,7 @@
                 role: '先鋒 (Initiator)',
                 bio: '來自俄羅斯的偵察型特務，擅長用弓箭揭露敵人位置，為隊友提供關鍵情報。',
                 image: './images/sova.jpg',
+                quoteImage: './images/sova_meme.jpg',
                 extra: '小知識：蘇法的偵察箭可以穿透牆壁，偵測到隱蔽的敵人。',
                 abilities: [
                     { name: '偵察箭 (Recon Bolt)', description: '射出一支偵察箭，會發出聲納脈衝，揭露附近敵人的位置。' },
@@ -136,6 +148,7 @@
                 role: '決鬥者 (Duelist)',
                 bio: '來自英國的火系特務，能用火焰傷害敵人並自我治療，以其侵略性的打法主導戰場。',
                 image: './images/phx.jpg',
+                quoteImage: './images/phx_meme.jpg',
                 extra: '小知識：菲尼克斯的烈炎鐵血可以用來封鎖敵人的逃跑路線。',
                 abilities: [
                     { name: '赤手烈焰 (Hot Hands)', description: '投擲一個燃燒彈，在地面生成一個火焰區域，傷害敵人並治療自己。' },
@@ -150,6 +163,7 @@
                 role: '控場者 (Controller)',
                 bio: '一個來自陰影的幽靈特務，擅長用傳送和煙霧來迷惑敵人，並控制戰場。',
                 image: './images/omen.jpg',
+                quoteImage: './images/omen_meme.jpg',
                 extra: '小知識：歐門的黑影籠罩可以用來創造假象，迷惑敵人。',
                 abilities: [
                     { name: '瞬步鬼影 (Shrouded Step)', description: '短距離傳送至可見位置。' },
@@ -186,7 +200,7 @@
                         <h2 class="text-3xl md:text-4xl font-bold text-red-400 mb-2">${agent.name}</h2>
                         <p class="text-xl md:text-2xl text-blue-300 mb-4">角色定位: ${agent.role}</p>
                         <p class="text-gray-300 leading-relaxed mb-6">${agent.bio}</p>
-                        <p class="text-yellow-300 leading-relaxed mb-6">${agent.extra}</p>
+                        <img src="${agent.quoteImage}" alt="名言圖片" class="quote-image">
                         <!-- Abilities -->
                         <h3 class="text-2xl font-semibold text-red-300 mb-4">技能</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
