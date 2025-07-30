@@ -46,6 +46,7 @@
         /* 新增圖片容器的過渡效果，讓放大更平滑 */
         .agent-image-container {
             transition: transform 0.3s ease-in-out; /* 調整過渡時間，讓放大更平滑 */
+            animation: flip-horizontal 5s infinite ease-in-out; /* 自動旋轉 */
         }
         /* 定義水平翻轉動畫 */
         @keyframes flip-horizontal {
@@ -89,28 +90,30 @@
         const agents = [
             {
                 id: 'jett',
-                name: '捷特 (Jett)',
+                name: '婕提 (Jett)',
                 role: '決鬥者 (Duelist)',
                 bio: '來自韓國的靈活特務，擅長快速突襲和撤退，以其敏捷的身法和精準的刀刃在戰場上穿梭。',
-                image: './images/jett.jpg', // Jett 圖片已設定
+                image: './images/jett.jpg',
+                extra: '名言金句：Jett revive me!!! Jett revive me! Jettttt !!!',
                 abilities: [
-                    { name: '疾風 (Tailwind)', description: '立即朝移動方向衝刺一小段距離。' },
-                    { name: '向上氣流 (Updraft)', description: '啟動後向上推進。' },
-                    { name: '煙幕彈 (Cloudburst)', description: '投擲一個可在短暫延遲後展開的煙霧雲團，阻擋視野。' },
-                    { name: '刀刃風暴 (Blade Storm)', description: '裝備數把可投擲的刀刃，點擊左鍵單發投擲，右鍵投擲所有剩餘刀刃。擊殺敵人可恢復所有刀刃。' }
+                    { name: '順風式 (Tailwind)', description: '立即朝移動方向衝刺一小段距離。' },
+                    { name: '乘風飛躍 (Updraft)', description: '啟動後向上推進。' },
+                    { name: '穿雲衝刺 (Cloudburst)', description: '投擲一個可在短暫延遲後展開的煙霧雲團，阻擋視野。' },
+                    { name: '暴風旋刃 (Blade Storm)', description: '裝備數把可投擲的刀刃，點擊左鍵單發投擲，右鍵投擲所有剩餘刀刃。擊殺敵人可恢復所有刀刃。' }
                 ]
             },
             {
                 id: 'sage',
-                name: '聖哲 (Sage)',
+                name: '聖祈 (Sage)',
                 role: '控場者 (Sentinel)',
                 bio: '來自中國的治療型特務，能夠治療盟友和減緩敵人，是團隊中不可或缺的支援角色。',
-                image: './images/sage.jpg', // 已更新為 sage.jpg
+                image: './images/sage.jpg',
+                extra: '小知識：聖祈的起死回生能讓團隊在關鍵時刻逆轉戰局。',
                 abilities: [
-                    { name: '緩速寶珠 (Slow Orb)', description: '投擲一個緩速寶珠，在地面生成一個會減緩敵人速度的區域。' },
-                    { name: '治療寶珠 (Healing Orb)', description: '治療一名受傷的盟友。' },
-                    { name: '障礙寶珠 (Barrier Orb)', description: '啟動後裝備一道堅固的牆壁，可旋轉放置。' },
-                    { name: '復活 (Resurrection)', description: '復活一名死亡的盟友。' }
+                    { name: '緩速靈球 (Slow Orb)', description: '投擲一個緩速寶珠，在地面生成一個會減緩敵人速度的區域。' },
+                    { name: '治癒靈球 (Healing Orb)', description: '治療一名受傷的盟友。' },
+                    { name: '屏障靈球 (Barrier Orb)', description: '啟動後裝備一道堅固的牆壁，可旋轉放置。' },
+                    { name: '起死回生 (Resurrection)', description: '復活一名死亡的盟友。' }
                 ]
             },
             {
@@ -118,25 +121,27 @@
                 name: '蘇法 (Sova)',
                 role: '先鋒 (Initiator)',
                 bio: '來自俄羅斯的偵察型特務，擅長用弓箭揭露敵人位置，為隊友提供關鍵情報。',
-                image: './images/sova.jpg', // 已更新為 sova.jpg
+                image: './images/sova.jpg',
+                extra: '小知識：蘇法的偵察箭可以穿透牆壁，偵測到隱蔽的敵人。',
                 abilities: [
                     { name: '偵察箭 (Recon Bolt)', description: '射出一支偵察箭，會發出聲納脈衝，揭露附近敵人的位置。' },
-                    { name: '震盪箭 (Shock Bolt)', description: '射出一支會爆炸並傷害敵人的箭。' },
-                    { name: '貓頭鷹無人機 (Owl Drone)', description: '部署並控制一架無人機，可以發射標記箭。' },
-                    { name: '獵人憤怒 (Hunter\'s Fury)', description: '射出三道致命的能量射線，可穿透牆壁並傷害敵人。' }
+                    { name: '震波箭 (Shock Bolt)', description: '射出一支會爆炸並傷害敵人的箭。' },
+                    { name: '夜梟無人機 (Owl Drone)', description: '部署並控制一架無人機，可以發射標記箭。' },
+                    { name: '獵者之怒 (Hunter\'s Fury)', description: '射出三道致命的能量射線，可穿透牆壁並傷害敵人。' }
                 ]
             },
             {
                 id: 'phoenix',
-                name: '鳳凰 (Phoenix)',
+                name: '菲尼克斯 (Phoenix)',
                 role: '決鬥者 (Duelist)',
                 bio: '來自英國的火系特務，能用火焰傷害敵人並自我治療，以其侵略性的打法主導戰場。',
-                image: './images/phx.jpg', // *** 這裡已將 phoenix.jpg 改為 phx.jpg ***
+                image: './images/phx.jpg',
+                extra: '小知識：菲尼克斯的烈炎鐵血可以用來封鎖敵人的逃跑路線。',
                 abilities: [
-                    { name: '燃燒彈 (Hot Hands)', description: '投擲一個燃燒彈，在地面生成一個火焰區域，傷害敵人並治療自己。' },
-                    { name: '烈焰之牆 (Blaze)', description: '召喚一道火焰牆，阻擋視野並傷害穿過的敵人。' },
-                    { name: '閃光彈 (Curveball)', description: '投擲一個弧形閃光彈，可使敵人失明。' },
-                    { name: '烈焰風暴 (Run It Back)', description: '標記當前位置，死亡後會在此位置復活。' }
+                    { name: '赤手烈焰 (Hot Hands)', description: '投擲一個燃燒彈，在地面生成一個火焰區域，傷害敵人並治療自己。' },
+                    { name: '烈炎鐵血 (Blaze)', description: '召喚一道火焰牆，阻擋視野並傷害穿過的敵人。' },
+                    { name: '閃光曲球 (Curveball)', description: '投擲一個弧形閃光彈，可使敵人失明。' },
+                    { name: '再來一局 (Run It Back)', description: '標記當前位置，死亡後會在此位置復活。' }
                 ]
             },
             {
@@ -144,12 +149,13 @@
                 name: '歐門 (Omen)',
                 role: '控場者 (Controller)',
                 bio: '一個來自陰影的幽靈特務，擅長用傳送和煙霧來迷惑敵人，並控制戰場。',
-                image: './images/omen.jpg', // 已更新為 omen.jpg
+                image: './images/omen.jpg',
+                extra: '小知識：歐門的黑影籠罩可以用來創造假象，迷惑敵人。',
                 abilities: [
-                    { name: '暗影步 (Shrouded Step)', description: '短距離傳送至可見位置。' },
-                    { name: '偏執狂 (Paranoia)', description: '發射一個暗影投射物，可使敵人視野受限。' },
-                    { name: '暗影球 (Dark Cover)', description: '發射一個暗影球，在目標位置形成一個持久的煙霧球。' },
-                    { name: '從眾如流 (From the Shadows)', description: '傳送至地圖上任何位置。' }
+                    { name: '瞬步鬼影 (Shrouded Step)', description: '短距離傳送至可見位置。' },
+                    { name: '夢魘侵襲 (Paranoia)', description: '發射一個暗影投射物，可使敵人視野受限。' },
+                    { name: '黑影籠罩 (Dark Cover)', description: '發射一個暗影球，在目標位置形成一個持久的煙霧球。' },
+                    { name: '闇夜襲擊 (From the Shadows)', description: '傳送至地圖上任何位置。' }
                 ]
             }
         ];
@@ -180,7 +186,7 @@
                         <h2 class="text-3xl md:text-4xl font-bold text-red-400 mb-2">${agent.name}</h2>
                         <p class="text-xl md:text-2xl text-blue-300 mb-4">角色定位: ${agent.role}</p>
                         <p class="text-gray-300 leading-relaxed mb-6">${agent.bio}</p>
-
+                        <p class="text-yellow-300 leading-relaxed mb-6">${agent.extra}</p>
                         <!-- Abilities -->
                         <h3 class="text-2xl font-semibold text-red-300 mb-4">技能</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
